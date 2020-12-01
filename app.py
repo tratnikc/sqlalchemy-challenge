@@ -91,16 +91,31 @@ def tobs():
 
     return jsonify(list(results))
 
+# Start Date route
 @app.route("/api/v1.0/<start>")
 def start_day(start):
     session = Session(engine)
     results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)) \
-                     .filter(Measurement.date == start) \
+                     .filter(Measurement.date >= start) \
                      .group_by(Measurement.date) \
                      .all()
     session.close()
 
     return jsonify(list(results))
+
+# Start Date and End Date route
+@app.route("/api/v1.0/<start>/<end>")
+def start_end(start, end):
+    session = Session(engine)
+    results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)) \
+                     .filter(Measurement.date >= start) \
+                     .filter(Measurement.date <= end) \
+                     .group_by(Measurement.date) \
+                     .all()
+    session.close()
+
+    return jsonify(list(results))
+
 
 # Main
 if __name__ == "__main__":

@@ -36,21 +36,28 @@ session.close()
 # Home route
 @app.route("/")
 def welcome():
-    return (
-        f"<h1>Welcome to the Surf's Up website!</h1><br/>"
-        f"<strong>Available routes:</strong><br/><br/>"
-        f"/api/v1.0/precipitation<br/>"
-        f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/start=yyyy-mm-dd<br/>"
-        f"/api/v1.0/start=yyyy-mm-dd/end=yyyy-mm-dd<br/>"
-    )
+    return """
+        <h1>Welcome to the Surf's Up website!</h1><br/>
+        <strong>Available routes:</strong><br/><br/>
+          <ul>
+            <li><a href="/api/v1.0/precipitation" target="_blank">/api/v1.0/precipitation</a></li>
+            <li><a href="/api/v1.0/stations" target="_blank">/api/v1.0/stations</a></li>
+            <li><a href="/api/v1.0/tobs" target="_blank">/api/v1.0/tobs</a></li>
+          </ul>
+        # /api/v1.0/precipitation<br/>
+        # /api/v1.0/stations<br/>
+        # /api/v1.0/tobs<br/>
+        # /api/v1.0/start=yyyy-mm-dd<br/>
+        # /api/v1.0/start=yyyy-mm-dd/end=yyyy-mm-dd<br/>
+    """
 
 # Precipitation route
 @app.route("/api/v1.0/precipitation")
 def precipitation():
     session = Session(engine)
-    results = session.query(Measurement.date, Measurement.prcp).all()
+    results = session.query(Measurement.date, Measurement.prcp) \
+                     .filter(Measurement.date >= one_year) \
+                     .all()
     session.close()
 
     precip = []

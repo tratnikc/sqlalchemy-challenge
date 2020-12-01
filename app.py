@@ -13,6 +13,7 @@ from sqlalchemy import create_engine, func, inspect
 engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 Base = automap_base()
 Base.prepare(engine,reflect=True)
+Base.classes.keys()
 
 # Reference tables
 Measurement = Base.classes.measurement
@@ -37,7 +38,7 @@ session.close()
 def welcome():
     return (
         f"<h1>Welcome to the Surf's Up website!</h1><br/>"
-        f"<strong>Available routes:</strong><br/>"
+        f"<strong>Available routes:</strong><br/><br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
@@ -90,6 +91,16 @@ def tobs():
 
     return jsonify(list(results))
 
+@app.route("/api/v1.0/<start>")
+def start_day(start):
+    session = Session(engine)
+    results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)) \
+                     .filter(Measurement.date == start) \
+                     .group_by(Measurement.date) \
+                     .all()
+    session.close()
+
+    return jsonify(list(results))
 
 # Main
 if __name__ == "__main__":

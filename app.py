@@ -3,6 +3,7 @@ from flask import Flask, jsonify
 import pandas as pd
 import numpy as np
 import datetime as dt
+from datetime import date, timedelta
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -21,8 +22,16 @@ Station = Base.classes.station
 # Flask
 app = Flask(__name__)
 
-# Flask routes
+# dates
+session = Session(engine)
+latest_date = session.query(Measurement.date) \
+                     .order_by(Measurement.date.desc()).first()
+print(latest_date)
+one_year = dt.datetime.strptime(*latest_date,"%Y-%m-%d") - timedelta(days=365)
+print(one_year)
+session.close()
 
+# Flask routes
 # Home route
 @app.route("/")
 def welcome():
@@ -61,7 +70,14 @@ def station():
     stns = list(np.ravel(results))
 
     return jsonify(stns)
-    
+
+# tobs route
+@app.route("/api/v1.0/tobs")
+def tobs():
+    session = Session(engine)
+
+
+
 # Main
 if __name__ == "__main__":
     app.run(debug=True)

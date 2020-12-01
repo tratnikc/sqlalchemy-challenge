@@ -38,17 +38,14 @@ session.close()
 def welcome():
     return """
         <h1>Welcome to the Surf's Up website!</h1><br/>
-        <strong>Available routes:</strong><br/><br/>
+        <strong>Available routes:</strong><br/>
           <ul>
             <li><a href="/api/v1.0/precipitation" target="_blank">/api/v1.0/precipitation</a></li>
             <li><a href="/api/v1.0/stations" target="_blank">/api/v1.0/stations</a></li>
             <li><a href="/api/v1.0/tobs" target="_blank">/api/v1.0/tobs</a></li>
+            <li><a href="/api/v1.0/start" target="_blank">/api/v1.0/yyyy-mm-dd </a></li>
+            <li><a href="/api/v1.0/start/end" target="_blank">/api/v1.0/yyyy-mm-dd/yyyy-mm-dd </a></li>
           </ul>
-        # /api/v1.0/precipitation<br/>
-        # /api/v1.0/stations<br/>
-        # /api/v1.0/tobs<br/>
-        # /api/v1.0/start=yyyy-mm-dd<br/>
-        # /api/v1.0/start=yyyy-mm-dd/end=yyyy-mm-dd<br/>
     """
 
 # Precipitation route

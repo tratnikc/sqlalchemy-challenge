@@ -27,9 +27,7 @@ app = Flask(__name__)
 session = Session(engine)
 latest_date = session.query(Measurement.date) \
                      .order_by(Measurement.date.desc()).first()
-print(latest_date)
 one_year = dt.datetime.strptime(*latest_date,"%Y-%m-%d") - timedelta(days=365)
-print(one_year)
 session.close()
 
 # Flask routes
@@ -43,8 +41,8 @@ def welcome():
             <li><a href="/api/v1.0/precipitation" target="_blank">/api/v1.0/precipitation</a></li>
             <li><a href="/api/v1.0/stations" target="_blank">/api/v1.0/stations</a></li>
             <li><a href="/api/v1.0/tobs" target="_blank">/api/v1.0/tobs</a></li>
-            <li><a href="/api/v1.0/start" target="_blank">/api/v1.0/yyyy-mm-dd </a></li>
-            <li><a href="/api/v1.0/start/end" target="_blank">/api/v1.0/yyyy-mm-dd/yyyy-mm-dd </a></li>
+            <li><a href="/api/v1.0/start" target="_blank">/api/v1.0/yyyymmdd </a></li>
+            <li><a href="/api/v1.0/start/end" target="_blank">/api/v1.0/yyyymmdd/yyyymmdd </a></li>
           </ul>
     """
 
@@ -80,8 +78,8 @@ def station():
 @app.route("/api/v1.0/tobs")
 def tobs():
     session = Session(engine)
+#  .filter(Measurement.tobs.isnot(None)) \
     most_active = session.query(Measurement.station) \
-                         .filter(Measurement.tobs.isnot(None)) \
                          .group_by(Measurement.station) \
                          .order_by(func.count(Measurement.station).desc()) \
                          .first()
@@ -100,7 +98,7 @@ def tobs():
 def start_day(start):
     session = Session(engine)
     results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)) \
-                     .filter(Measurement.date >= start) \
+                     .filter(func.strftime("%Y%m%d", Measurement.date) >= start ) \
                      .group_by(Measurement.date) \
                      .all()
     session.close()
@@ -112,8 +110,8 @@ def start_day(start):
 def start_end(start, end):
     session = Session(engine)
     results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)) \
-                     .filter(Measurement.date >= start) \
-                     .filter(Measurement.date <= end) \
+                     .filter(func.strftime("%Y%m%d", Measurement.date) >= start) \
+                     .filter(func.strftime("%Y%m%d", Measurement.date) <= end) \
                      .group_by(Measurement.date) \
                      .all()
     session.close()

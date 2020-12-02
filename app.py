@@ -99,7 +99,6 @@ def start_day(start):
     session = Session(engine)
     results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)) \
                      .filter(func.strftime("%Y%m%d", Measurement.date) >= start ) \
-                     .group_by(Measurement.date) \
                      .all()
     session.close()
 
@@ -112,7 +111,6 @@ def start_end(start, end):
     results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)) \
                      .filter(func.strftime("%Y%m%d", Measurement.date) >= start) \
                      .filter(func.strftime("%Y%m%d", Measurement.date) <= end) \
-                     .group_by(Measurement.date) \
                      .all()
     session.close()
 

@@ -15,7 +15,7 @@ Base = automap_base()
 Base.prepare(engine,reflect=True)
 Base.classes.keys()
 
-# Reference tables
+# Reference the tables
 Measurement = Base.classes.measurement
 Station = Base.classes.station
 
@@ -35,15 +35,29 @@ session.close()
 @app.route("/")
 def welcome():
     return """
-        <h1>Welcome to the Surf's Up website!</h1><br/>
-        <strong>Available routes:</strong><br/>
-          <ul>
-            <li><a href="/api/v1.0/precipitation" target="_blank">/api/v1.0/precipitation</a></li>
-            <li><a href="/api/v1.0/stations" target="_blank">/api/v1.0/stations</a></li>
-            <li><a href="/api/v1.0/tobs" target="_blank">/api/v1.0/tobs</a></li>
-            <li><a href="/api/v1.0/start" target="_blank">/api/v1.0/yyyymmdd </a></li>
-            <li><a href="/api/v1.0/start/end" target="_blank">/api/v1.0/yyyymmdd/yyyymmdd </a></li>
-          </ul>
+        <style>
+            h1 {text-align : center}
+            h2 {text-align : center}
+            ul {list-style-position : inside}
+            li {list-style-position : inside}
+            .div {text-align : center}
+            .inline {display : inline-block; text-align : left;}
+        </style>
+
+        <h1>Welcome to the Surf's Up!</h1><br/>
+        <h2><strong>Available routes:</strong></h2><br/>
+
+        <div class="div">
+            <div class="inline">
+                <ul>
+                    <li><a href="/api/v1.0/precipitation" target="_blank">/api/v1.0/precipitation</a></li>
+                    <li><a href="/api/v1.0/stations" target="_blank">/api/v1.0/stations</a></li>
+                    <li><a href="/api/v1.0/tobs" target="_blank">/api/v1.0/tobs</a></li>
+                    <li><a href="/api/v1.0/start" target="_blank">/api/v1.0/yyyymmdd </a></li>
+                    <li><a href="/api/v1.0/start/end" target="_blank">/api/v1.0/yyyymmdd/yyyymmdd </a></li>
+                </ul>
+            </div>
+        </div>
     """
 
 # Precipitation route
@@ -68,11 +82,11 @@ def precipitation():
 @app.route("/api/v1.0/stations")
 def station():
     session = Session(engine)
-    results = session.query(Station.station).all()
+    results = session.query(Station.station, Station.name).all()
     session.close()
-    stns = list(np.ravel(results))
+#    stns = list(np.ravel(results))
 
-    return jsonify(stns)
+    return jsonify(results)
 
 # tobs route
 @app.route("/api/v1.0/tobs")

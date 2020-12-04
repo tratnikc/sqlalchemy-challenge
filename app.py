@@ -69,14 +69,17 @@ def precipitation():
                      .all()
     session.close()
 
-    precip = []
-    for date, prcp in results:
-        precip_dict = {}
-        precip_dict['date'] = date
-        precip_dict['prcp'] = prcp
-        precip.append(precip_dict)
+    precip_dict = {date: prcp for date, prcp in results}
+    # precip = []
+    # precip_dict = {}
+    # for date, prcp in results:
+    #     prcp_dict = {}
+    #     prcp_dict['date'] = date
+    #     prcp_dict['prcp'] = prcp
+    #     precip.append(prcp_dict)
 
-    return jsonify(precip)
+    # precip_dict = dict(results)
+    return jsonify(precip_dict)
 
 # Station route
 @app.route("/api/v1.0/stations")
@@ -84,9 +87,9 @@ def station():
     session = Session(engine)
     results = session.query(Station.station, Station.name).all()
     session.close()
-#    stns = list(np.ravel(results))
+    stns = list(np.ravel(results))
 
-    return jsonify(results)
+    return jsonify(stns)
 
 # tobs route
 @app.route("/api/v1.0/tobs")
@@ -105,7 +108,7 @@ def tobs():
                      .all()
     session.close()
 
-    return jsonify(list(results))
+    return jsonify(list(np.ravel(results)))
 
 # Start Date route
 @app.route("/api/v1.0/<start>")
@@ -116,7 +119,7 @@ def start_day(start):
                      .all()
     session.close()
 
-    return jsonify(list(results))
+    return jsonify(list(np.ravel(results)))
 
 # Start Date and End Date route
 @app.route("/api/v1.0/<start>/<end>")
@@ -128,7 +131,7 @@ def start_end(start, end):
                      .all()
     session.close()
 
-    return jsonify(list(results))
+    return jsonify(list(np.ravel(results)))
 
 
 # Main

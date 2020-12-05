@@ -45,7 +45,7 @@
         * return a JSON list of tobs for the previous year for the most active station
    * /api/v1.0/<start>
         * return TMIN, TAVG, TMAX for a all dates greater than and equal to the start date
-   * /api/v1.0/<start>/<end>  
+   * <p>/api/v1.0/&lt;start&gt;/&lt;end&gt;</p>
         * return TMIN, TAVG, TMAX for a all dates between start date and end date, inclusive
 #### Bonus: Other Recommended Analyses
 ##### Temperature Analysis I

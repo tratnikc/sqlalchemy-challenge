@@ -49,6 +49,14 @@
         * return TMIN, TAVG, TMAX for a all dates between start date and end date, inclusive
 
 ### Analysis
-#### ![Precipitation Analysis](https://github.com/tratnikc/sqlalchemy-challenge/blob/main/Images/precipitation.png)
-
+#### Precipitation Analysis  
+![Precipitation Analysis](https://github.com/tratnikc/sqlalchemy-challenge/blob/main/Images/precipitation.png)
+#### Summary Statistics  
+![Summary Statistics](https://github.com/tratnikc/sqlalchemy-challenge/blob/main/Images/summary_statistics.png)
+#### Stations Histogram  
+![stations historgram](https://github.com/tratnikc/sqlalchemy-challenge/blob/main/Images/histogram.png)
+#### Temperature Analysis
+![temperature analysis](https://github.com/tratnikc/sqlalchemy-challenge/blob/main/Images/trip_avg_temp.png)
+#### Daily Rainfall Average
+![daily rainfall average](https://github.com/tratnikc/sqlalchemy-challenge/blob/main/Images/daily_normals.png)
 

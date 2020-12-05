@@ -43,18 +43,12 @@
         * return a JSON list pf stations from the dataset
    * /api/v1.0/tobs
         * return a JSON list of tobs for the previous year for the most active station
-   * /api/v1.0/<start>
+   * <p>/api/v1.0/&lt;start&gt;</p>
         * return TMIN, TAVG, TMAX for a all dates greater than and equal to the start date
    * <p>/api/v1.0/&lt;start&gt;/&lt;end&gt;</p>
         * return TMIN, TAVG, TMAX for a all dates between start date and end date, inclusive
-#### Bonus: Other Recommended Analyses
-##### Temperature Analysis I
-    * 
-##### Temperature Analysis II
-### Steps
-
 
 ### Analysis
-
+#### ![Precipitation Analysis](https://github.com/tratnikc/sqlalchemy-challenge/blob/main/Images/precipitation.png)
 
 

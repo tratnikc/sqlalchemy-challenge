@@ -21,17 +21,36 @@
 * Use SQLAlchemy to connect to sqlite database
 * Use SQLAlchemy to reflect tables into classes and save reference to those classes
 
-#### Precipitation Analysis
+##### Precipitation Analysis
 * Design a query to retrieve the last 12 months of precipitation data
 * Load the query results into a Pandas DataFrame
 * Plot the results using DataFrame plot method
 * Use Pandas to print the summary statistics for the precipitation data
 
-#### Station Analysis
+##### Station Analysis
 * Design a query to calculate the total number of stations
 * Design a query to find the most active stations
 * Design a query to retrieve the last 12 months of temperature observations data (TOBS)
+* Plot the results as a histogram with bins=12
 
+#### Climate App
+* Create Routes
+   * /  
+        * home page; list all routes that are available
+   * /api/v1.0/precipitation  
+        * return the JSON representation of dictionary from query results using date as key and prcp as value
+   * /api/v1.0/stations
+        * return a JSON list pf stations from the dataset
+   * /api/v1.0/tobs
+        * return a JSON list of tobs for the previous year for the most active station
+   * /api/v1.0/<start>
+        * return TMIN, TAVG, TMAX for a all dates greater than and equal to the start date
+   * /api/v1.0/<start>/<end>  
+        * return TMIN, TAVG, TMAX for a all dates between start date and end date, inclusive
+#### Bonus: Other Recommended Analyses
+##### Temperature Analysis I
+    * 
+##### Temperature Analysis II
 ### Steps
 
 

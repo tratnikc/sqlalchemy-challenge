@@ -53,8 +53,8 @@ def welcome():
                     <li><a href="/api/v1.0/precipitation" target="_blank">/api/v1.0/precipitation</a></li>
                     <li><a href="/api/v1.0/stations" target="_blank">/api/v1.0/stations</a></li>
                     <li><a href="/api/v1.0/tobs" target="_blank">/api/v1.0/tobs</a></li>
-                    <li><a href="/api/v1.0/start" target="_blank">/api/v1.0/yyyymmdd </a></li>
-                    <li><a href="/api/v1.0/start/end" target="_blank">/api/v1.0/yyyymmdd/yyyymmdd </a></li>
+                    <li><a href="/api/v1.0/yyyymmdd" target="_blank">/api/v1.0/start </a></li>
+                    <li><a href="/api/v1.0/yyyymmdd/yyyymmdd" target="_blank">/api/v1.0/start/end </a></li>
                 </ul>
             </div>
         </div>
